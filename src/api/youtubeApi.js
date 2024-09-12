@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "../features/store"
-import { selectAccessToken } from "../features/slices/accessTokenSlice";
+import { accessTokenRemove, selectAccessToken } from "../features/slices/accessTokenSlice";
 const baseUrl = "https://www.googleapis.com/youtube/v3";
 
 //axios.itercepters
@@ -51,5 +51,9 @@ export const getChannelList =async()=>{
         return channelsResouces
     }catch(err){
         console.error(err.status, err.message);
+        if(err.status === 401){
+            //清空redux 內的 accessToken, 需要用 state 屬性執行
+            store.dispatch(accessTokenRemove())
+        }
     }
 }
