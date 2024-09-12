@@ -6,7 +6,7 @@
 // 全域使用
 :root{
     //主要用色
-    --brand: #953ae0;
+    --brand: #ad620c;
     --secondary: #30A9DE;
     --positive: #4CAF50;
     --negative:#FF5050;
@@ -52,6 +52,7 @@ body::-webkit-scrollbar {
 
 body {
     //字體
+    --title-font-size:30px;
     --main-font-size: 18px;   
     //背景色
     background-color: var(--background);
@@ -69,16 +70,12 @@ body {
 //常用的 css 樣式
 
 //flex-box
-@mixin d-flex-column-a-center{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-@mixin d-flex-row-a-center{
+@mixin d-flex-dir-j-a($flex-direction,$justify-connetnt, $align-items){
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: $flex-direction;
+    justify-content: $justify-connetnt;
+    align-items: $align-items;
 }
 
 //text ...

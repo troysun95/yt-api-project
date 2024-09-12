@@ -1,0 +1,43 @@
+
+@import '../base.scss';
+
+.loginPanel{
+    width: 75%;
+    height: 75%;
+    padding: 10px;
+    background-color: var(--background);
+    border-radius: 12px;
+    box-shadow: 2px 2px 3px rgba($color: #000000, $alpha: 0.5);
+    @include d-flex-dir-j-a(column, start,center);
+    h3{
+        font-size: var(--title-font-size);
+        margin-bottom: 3rem;
+        color: var(--brand);
+    }
+    button{
+        cursor: pointer;
+        margin: 10px 0;
+        border:none;
+        box-shadow: 0 2px 1px rgba(0,0,0, 0.3);
+    }
+    .getAuthBtn{
+        width: 50%;
+        height: 50px;
+        border-radius:25px;
+        margin-bottom: 25%;
+    }
+    .registerPanel{
+        @include d-flex-dir-j-a(row, center, center);
+        span{
+            margin: 20px;
+        } 
+        button{ 
+            border-radius:8px;            
+        }
+    }
+    .divider{
+        width: 80%;
+        height: 1px;
+        background-color: var(--divider);
+    }
+}
