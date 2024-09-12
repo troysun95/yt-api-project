@@ -23,8 +23,8 @@ const RedirectPage = () => {
   }, [navigate,dispatch]);
 
   return (
-    <div>
-      <h2>處理中...</h2>
+    <div >
+      <h2 >驗證取得中...</h2>
     </div>
   );
 };
