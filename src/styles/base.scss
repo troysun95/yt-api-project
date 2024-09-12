@@ -1,0 +1,148 @@
+@import 'reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+TC:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+TC:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// 全域使用
+:root{
+    //主要用色
+    --brand: #953ae0;
+    --secondary: #30A9DE;
+    --positive: #4CAF50;
+    --negative:#FF5050;
+    --caution: #F6AE2D;
+
+    //背景色
+    --background:#FFFFFF;
+    --navbar-background:#F6F7F8;
+    --divider:#E2E8F0;
+
+
+
+    //文字顏色
+    --main-text-color:#111111;
+    --secondary-text-color:#93989A;
+    //card 
+
+    //card-view
+
+    //modal
+
+    //字體
+    --main-font-family: "Noto Sans TC", sans-serif;
+    --secondary-font-family:"Montserrat", sans-serif;;
+
+    //box-sizing
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+}
+
+//scrollbar 設定
+html {
+    overflow: -moz-hidden-unscrollable;
+    height: 100%;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    //字體
+    --main-font-size: 18px;   
+    //背景色
+    background-color: var(--background);
+    width: 1440px;
+    height: 1024px;
+    //隱藏 body scrollbar
+    -ms-overflow-style: none;
+    height: 100%;
+	width: 100vw;
+	overflow: auto;
+    border: 1px solid #000;
+}
+
+
+//常用的 css 樣式
+
+//flex-box
+@mixin d-flex-column-a-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin d-flex-row-a-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+//text ...
+@mixin title-three-dots{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+//only available for chrome & safari
+@mixin line-clamp($lines) {
+    display: -webkit-box;              
+    -webkit-box-orient: vertical;      
+    -webkit-line-clamp: $lines;       
+    overflow: hidden;                  
+    text-overflow: ellipsis;           
+}
+
+//modal 相關
+@mixin modal-title-container{
+    .titleContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 10px 0 15px;
+        width: 100%;
+        height: 42px;
+        border-bottom: 1px solid #EBEBEB;
+        .title{
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 26.06px;
+        }
+        .closeBtn{
+            cursor: pointer;
+        }
+    }
+}
+
+
+@mixin modal-btn-panel{
+    .btnPanel{
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        height :44px;
+        cursor: pointer;
+    }
+}
+
+@mixin  modal-input-panel{
+    input{
+        border:none;
+        outline: none;
+        background-color: rgba(0,0,0,0);
+        width: 100%;
+        height: 100%;
+        margin-left: 10px;
+        font-family: var(--main-font-family);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20.27px;
+        text-align: left;
+    }
+
+}
+
