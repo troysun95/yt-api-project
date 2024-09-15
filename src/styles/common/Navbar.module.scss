@@ -1,0 +1,115 @@
+@import '../base.scss';
+.navbar{
+    border: 2px solid blue;
+    width: 40%;
+    height: 100%;
+    margin-top: 50px;
+    background-color: var(--background);
+    font-family: var(--main-font-family);
+   .brandContainer{
+        width: 100%;
+        height: 40px;
+        margin: 0 0 10px 10px ;
+        @include d-flex-dir-j-a(row, start, center);
+        .togglerContainer{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 1px solid #000;
+            @include d-flex-dir-j-a(row, center, center);
+            &:hover{
+                background-color: var(--hover-color);
+            }
+        }
+        .brand{
+            width: 75%;
+            height: 60px;
+            border: 1px solid #000;
+            @include d-flex-dir-j-a(row, space-evenly ,center);
+            span{
+                cursor: pointer;
+
+            }
+            p{
+                margin-left: 10px;
+                font-size: 20px;
+                text-align: center;
+                line-height: 23px;
+            }
+        }
+   }
+   .blocksWrapperOpen{
+        width: 90%;
+        height: 93%;
+        overflow-y:scroll ;
+        border: 2px solid red;
+        margin-left: 10px;
+        .divider{
+            margin: 5px 10px;
+            width: 90%;
+            height: 1px;
+            background-color:#000;
+
+        }
+        .blockTitle{
+            padding-left: 10px;
+            margin: 3px 0 10px 0;
+            font-size: var(--title);
+            font-size: 18px;
+        }
+        .itemContainer{
+            border: 1px solid red;
+            width: 80%;
+            height: 30px;
+            border-radius: 10px;
+            margin: 1px 0 1px 5px;
+            @include d-flex-dir-j-a(row, start, center);
+            cursor: pointer;
+            img{
+                width: 20px;
+                height: 20px;
+                margin: 0 3px;
+                border: none;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            span{
+                @include title-three-dots;
+            }
+            &:hover{
+                background-color: var(--hover-color);
+            }
+        }
+   }
+   .blocksWrapperClosed{
+    position:absolute;
+    width: 10px;
+    outline:  1px solid purple;
+    //opacity: 0;
+    pointer-events: none;
+   }
+
+   //toggler closed
+   .iconPanel{
+        width: 35%;
+        height: 93%;
+        border: 2px solid green;
+        @include d-flex-dir-j-a(column, start, center);
+        .iconItem{
+            width: 80%;
+            height: 12%;
+            cursor: pointer;
+            border-radius: 5px;
+            @include d-flex-dir-j-a(column, center, center);
+            &:hover{
+                background-color: var(--hover-color);
+            }
+            span{
+                font-size: 10px;
+            }
+        }
+   }
+}
+

@@ -1,5 +1,4 @@
 .appContainer {
-  
   border: 2px solid red;
   max-width: 1440px;
   max-height: 1280px;
@@ -11,13 +10,15 @@
   justify-content: center;
   width: 90%; /* mobile first */
 
-  /* tablet */
-  @media (min-width: 768px) and (max-width: 992px) {
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .appContainer{
     width: 750px;
   }
+  
+}
 
-  /* desktop */
-  @media (min-width: 992px) and (max-width: 1440px) {
-    width: 960px;
-  }
+@media (min-width: 992px) and (max-width: 1440px) {
+ .appContainer{ width: 960px;}
 }

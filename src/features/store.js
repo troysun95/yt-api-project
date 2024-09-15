@@ -4,7 +4,7 @@ import accessTokenSlice from "./slices/accessTokenSlice";
 import storage from "redux-persist/lib/storage"; // 默認使用 localStorage 作為存儲引擎
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
-
+import navbarSlice from "./slices/navbarSlice";
 // 配置 persist
 const persistConfig = {
   key: "root",
@@ -15,6 +15,7 @@ const persistConfig = {
 // 將 reducers 組合並且與 persist 連接
 const rootReducer = combineReducers({
   accessToken: accessTokenSlice,
+  navbar: navbarSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

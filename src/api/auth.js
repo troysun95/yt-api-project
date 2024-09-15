@@ -15,3 +15,4 @@ export const getGoogleAuth = () => {
     //const popup = window.open(authLink, 'width=600,height=600');
     //then get the code in the url
 };
+    

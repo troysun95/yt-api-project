@@ -5,7 +5,13 @@ const baseUrl = "https://www.googleapis.com/youtube/v3";
 
 //axios.itercepters
 const axiosInstance = axios.create({baseURL:baseUrl});
-
+const dealWithErr = (err)=>{
+    console.error(err.status, err.message);
+        if(err.status === 401){
+            //清空redux 內的 accessToken, 需要用 state 屬性執行
+            store.dispatch(accessTokenRemove())
+        }
+}
 const getRetriveToken =()=>{
    //改為從 redux 中提取,在非 react 元件內，需要用這個方法提取
     const state = store.getState();
@@ -41,19 +47,31 @@ axiosInstance.interceptors.request.use(
 export const getChannelList =async()=>{
     try{
         const response = await axiosInstance.get(`${baseUrl}/subscriptions`,{
-            //寫不是放在請求主體，就是代表要放 url 參數ㄋ
             params: {
-                part: "id,contentDetails,snippet,subscriberSnippet", // 需要包含 'part' 參數
-                mine: true, // 查詢自己的訂閱頻道
+                part: "id,snippet", 
+                mine: true,
+                maxResults: 50,
               },
           });
         const channelsResouces = response.data.items;
         return channelsResouces
     }catch(err){
-        console.error(err.status, err.message);
-        if(err.status === 401){
-            //清空redux 內的 accessToken, 需要用 state 屬性執行
-            store.dispatch(accessTokenRemove())
-        }
+        dealWithErr()
+    }
+}
+
+
+export const  getUserNow = async()=>{
+    try{
+        const response = await axiosInstance.get(`${baseUrl}/channels`,{
+            params:{
+                part:"id, snippet",
+                mine:true,
+            }
+        });
+        console.log('getUserNowData',response.data.items )
+        return response.data.items;
+    }catch(err){
+        dealWithErr()
     }
 }

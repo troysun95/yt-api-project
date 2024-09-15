@@ -16,6 +16,7 @@
     --background:#FFFFFF;
     --navbar-background:#F6F7F8;
     --divider:#E2E8F0;
+    --hover-color:	#F0F0F0;
 
 
 
@@ -27,6 +28,8 @@
     //card-view
 
     //modal
+    --modal-background: #93989A; 
+    //
 
     //字體
     --main-font-family: "Noto Sans TC", sans-serif;
@@ -57,7 +60,7 @@ body {
     //背景色
     background-color: var(--background);
     width: 1440px;
-    height: 1024px;
+    height: 1280px;
     //隱藏 body scrollbar
     -ms-overflow-style: none;
     height: 100%;
@@ -78,6 +81,17 @@ body {
     align-items: $align-items;
 }
 
+
+@mixin icon-setting{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+        background-color: var(--hover-color);
+    }
+}
 //text ...
 @mixin title-three-dots{
     text-overflow: ellipsis;
@@ -93,6 +107,7 @@ body {
     overflow: hidden;                  
     text-overflow: ellipsis;           
 }
+
 
 //modal 相關
 @mixin modal-title-container{

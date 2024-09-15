@@ -4,7 +4,6 @@ import { getGoogleAuth } from "../api/auth";
 import {  useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "../features/slices/accessTokenSlice";
-
 const LoginPage =()=>{
     const navigate = useNavigate();
     const access_token = useSelector(selectAccessToken).accessTokenString

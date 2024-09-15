@@ -1,0 +1,9 @@
+@import '../base.scss';
+
+.homePage{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    @include d-flex-dir-j-a(row, space-between, auto);
+}

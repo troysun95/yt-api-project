@@ -1,27 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getChannelList } from "../api/youtubeApi"
+import styles from "styles/HomePage/HomePage.module.scss"
+import {  useSelector } from "react-redux";
 import { selectAccessToken } from "../features/slices/accessTokenSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { accessTokenRemove } from "../features/slices/accessTokenSlice";
-
+import Navbar from "components/common/Navbar/Navbar"
+import HeaderPanel from "components/common/HeaderPanel";
 const HomePage = ()=>{
     //檢查是否有效
     const navigate = useNavigate()
     const access_token = useSelector(selectAccessToken).accessTokenString;
-    console.log('access_token in Redux',access_token) 
-
-
-    const dispatch = useDispatch();
-    const handleClick = async() =>{
-        const lists = await getChannelList();
-        console.log('lists', lists)
-    }
-    
-
-    const clearToken =()=>{
-        dispatch(accessTokenRemove())
-    }
 
     useEffect(()=>{
         if(!access_token){
@@ -33,10 +20,10 @@ const HomePage = ()=>{
     
     
     return(
-        <>
-            <button onClick={handleClick}>getChannelList</button>
-            <button onClick={clearToken}>clear access_token </button>
-        </>
+        <div className={styles.homePage}>
+            <HeaderPanel/>
+            <Navbar/>
+        </div>
     )
 }
 
