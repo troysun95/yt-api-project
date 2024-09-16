@@ -1,6 +1,6 @@
 import styles from "App.module.scss";
 import { UserProvider } from "contexts/UserContext";
-import { HomePage, LoginPage, RedirectPage,ErrorPage } from "pages";
+import { HomePage, LoginPage, RedirectPage,ErrorPage, UserPage } from "pages";
 import { BrowserRouter, Routes,Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/redirect" element={<RedirectPage/>} />
             <Route path="/home" element={<HomePage/>} />
+            <Route path="/user" element={<UserPage/>} />
             <Route path="*" element={<ErrorPage/>}/>
           </Routes>
         </UserProvider>

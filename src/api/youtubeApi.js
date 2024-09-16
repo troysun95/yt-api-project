@@ -69,7 +69,6 @@ export const  getUserNow = async()=>{
                 mine:true,
             }
         });
-        console.log('getUserNowData',response.data.items )
         return response.data.items;
     }catch(err){
         dealWithErr()

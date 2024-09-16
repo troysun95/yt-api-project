@@ -31,8 +31,7 @@ const Navbar = ()=>{
         try{
             const response = await getChannelList();
             setChannels(response);
-            
-            console.log(response)
+            //console.log(response)
         }catch(err){
             console.error(err)
         }

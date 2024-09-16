@@ -16,7 +16,7 @@ import { useUser } from "contexts/UserContext";
 const HeaderPanel =()=>{
     const navbar = useSelector(selectNavbar);
     const navigate = useNavigate();
-    const userNow = useUser();
+    const {userNow} = useUser();
     let isOpened = navbar.isMenuOpened;
     const [idClicked, setIdClicked] = useState(null);
     const dispatch =useDispatch();
@@ -34,8 +34,9 @@ const HeaderPanel =()=>{
     }
 
     useEffect(()=>{
-        console.log('idClicked',idClicked)
+        console.log(userNow);
     },[idClicked])
+
     return(
         <div className={styles.headerPanel}>
             <div className={styles.brandContainer}>
@@ -88,16 +89,19 @@ const HeaderPanel =()=>{
                     {(userNow && userNow.length) && (
                         <>
                             <img 
-                                src={userNow.snippet.thumbnails.default.url} 
-                                alt={userNow.snippet.title} 
+                                src={userNow[0].snippet.thumbnails.default.url} 
+                                alt={userNow[0].snippet.title} 
                             />
                         </>
                     )}
                 </div>
-                <UserMenu 
-                    idClicked={idClicked}
-                    handleSetId={handleSetId}
-                />
+                {(userNow && userNow.length) && (
+                       <UserMenu 
+                       idClicked={idClicked}
+                       handleSetId={handleSetId}
+                       user={userNow}
+                   />
+                )}
             </div>
         </div>
     )
