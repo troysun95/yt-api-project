@@ -1,109 +1,104 @@
 import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "styles/common/HeaderPanel.module.scss"
+import styles from "styles/common/HeaderPanel.module.scss";
 //import mui icons
 import {
-    SmartDisplay, Menu, VideoCall,Notifications,NotificationsNoneOutlined
+    SmartDisplay, Menu, VideoCall, Notifications, NotificationsNoneOutlined
 } from "@mui/icons-material";
 import { closeMenu, openMenu, selectNavbar } from "features/slices/navbarSlice";
 import {  useEffect, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import UserMenu from "./Navbar/UserMenu";
 import { useUser } from "contexts/UserContext";
+import clsx from "clsx";
 
-//id 自己設 , 同樣用 idClicked 
-const HeaderPanel =()=>{
+const HeaderPanel = () => {
     const navbar = useSelector(selectNavbar);
     const navigate = useNavigate();
-    const {userNow} = useUser();
+    const [activeIcon,setActiveIcon] = useState(null)
+    const { userNow } = useUser();
     let isOpened = navbar.isMenuOpened;
-    const [idClicked, setIdClicked] = useState(null);
-    const dispatch =useDispatch();
-    const handleClick =()=>{
-        if(isOpened){
-            dispatch(closeMenu())
-        }else{
-            dispatch(openMenu())
-        }
-        console.log('isOpened',isOpened)
-    }
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        isOpened ? dispatch(closeMenu()) : dispatch(openMenu());
+    };
+    
+    const handleIconOpen = (e) => {
+        const idClicked = e.currentTarget.id;
+        setActiveIcon((prevActiveIcon) => (prevActiveIcon === idClicked ? null : idClicked)); // Toggle logic
+    };
 
-    const handleSetId = (e)=>{
-        setIdClicked(e.currentTarget.id)
-    }
 
     useEffect(()=>{
-        console.log(userNow);
-    },[idClicked])
+    console.log(activeIcon)
+    },[activeIcon])
 
-    return(
+    return (
         <div className={styles.headerPanel}>
-            <div className={styles.brandContainer}>
-                <div 
+            <div className={clsx(styles.brandContainer, { [styles.brandContainerClosed]: isOpened })}>
+                <div
                     className={styles.menuToggler}
-                    onClick={handleClick}    
-                ><Menu/></div>
+                    onClick={handleClick}
+                >
+                    <Menu />
+                </div>
                 <div className={styles.brand}>
-                    <SmartDisplay 
+                    <SmartDisplay
                         className={styles.brandIcon}
-                        onClick={()=>{navigate('/home')}}
+                        onClick={() => { navigate('/home') }}
                     />
                     <div className={styles.brandTitle}>YT API Project</div>
                 </div>
             </div>
-            <SearchBar/>
-            <div className={styles.headerIconCotainer}>
-                <div 
+            <SearchBar />
+            <div className={styles.headerIconContainer}>
+                <div
                     id="video"
-                    onClick={handleSetId}
-                    className={styles.vedioIcon}
+                    onClick={handleIconOpen}
+                    className={styles.videoIcon}
                 >
-                    <VideoCall/>
+                    <VideoCall />
                 </div>
-                {idClicked === "video" ? (
-                    <div className={styles.uploadContainer}>
+                { activeIcon === "video" && (
+                    <div className={styles.uploadMenu}>
                         <div>上傳影片</div>
                         <div>建立貼文</div>
                     </div>
-                    ):(
-                        null
-                    )
-                }  
-                <div 
-                    className={styles.notifyIocn} 
+                )}
+                <div
+                    className={styles.notifyIcon}
                     id="notifications"
-                    onClick={handleSetId}
+                    onClick={handleIconOpen}
                 >
-                    {
-                    idClicked === "notifications" ? 
-                        <Notifications/> 
-                        : <NotificationsNoneOutlined/>
+                    {(activeIcon ==="notifications") ?
+                        <Notifications /> :
+                        <NotificationsNoneOutlined />
                     }
                 </div>
-                <div 
-                    className={styles.userMenu}
+                {activeIcon === "notifications" && (
+                    <div className={styles.notifyMenu}></div>
+                )}
+                <div
+                    className={styles.userMenuIcon}
                     id="user"
-                    onClick={handleSetId}
+                    onClick={handleIconOpen}
                 >
-                    {(userNow && userNow.length) && (
+                    {userNow && userNow.length > 0 && (
                         <>
-                            <img 
-                                src={userNow[0].snippet.thumbnails.default.url} 
-                                alt={userNow[0].snippet.title} 
+                            <img
+                                className={styles.userAvatar}
+                                src={userNow[0].snippet.thumbnails.default.url}
+                                alt={userNow[0].snippet.title}
                             />
                         </>
                     )}
                 </div>
-                {(userNow && userNow.length) && (
-                       <UserMenu 
-                       idClicked={idClicked}
-                       handleSetId={handleSetId}
-                       user={userNow}
-                   />
+                {( activeIcon === "user" && userNow && userNow.length > 0) && (
+                    <UserMenu/>
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default HeaderPanel;

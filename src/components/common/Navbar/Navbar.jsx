@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { getChannelList } from "api/youtubeApi";
 import ChannelItem from "./Channeltem";
 import IconPanel from "./IconPanel";
-import clsx from "clsx";
 //mui icons
 import {
     Home, HomeOutlined,AppShortcut, AppShortcutOutlined, Subscriptions, SubscriptionsOutlined,
@@ -14,10 +13,11 @@ import {
     DownloadDone, DownloadDoneOutlined, LocalFireDepartment, LocalFireDepartmentOutlined,
     MusicNote,MusicNoteOutlined,LocalMovies, LocalMoviesOutlined,LiveTv, LiveTvTwoTone,
     SportsEsports, SportsEsportsOutlined,Newspaper, NewspaperOutlined,EmojiEvents, EmojiEventsOutlined,
-    School, SchoolOutlined, Podcasts,PodcastsOutlined,Settings, SettingsOutlined, Report, ReportGmailerrorredOutlined
+    School, SchoolOutlined, Podcasts,PodcastsOutlined,Settings, SettingsOutlined, Report, ReportGmailerrorredOutlined,
+    Menu, SmartDisplay
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNavbar, setIdClicked } from "features/slices/navbarSlice";
+import { selectNavbar, setIdClicked,closeMenu, openMenu } from "features/slices/navbarSlice";
 
 
 const Navbar = ()=>{
@@ -36,8 +36,20 @@ const Navbar = ()=>{
             console.error(err)
         }
     }
-    const handleClick =(e)=>{
-        dispatch(setIdClicked(e.target.id));
+
+    const handleSetId =(e)=>{
+        dispatch(setIdClicked(e.currentTarget.id));
+        console.log('點擊對象 id setted:', e.currentTarget.id)
+    }
+
+    const handleToggeler = (e)=>{
+        e.stopPropagation()
+        if(isOpened){
+            dispatch(closeMenu())
+        }else{
+            dispatch(openMenu())
+        }
+        console.log('isOpened',isOpened)
     }
 
     const navbarLinkData = {
@@ -173,94 +185,114 @@ const Navbar = ()=>{
     }
 
     useEffect(()=>{
-        fetchChannelList()
+        fetchChannelList();
     },[navigate])
+
     return (
         <>
             <div className={styles.navbar}>
                 {isOpened ? (
                     // Open, clsx: isOpened
-                    <div className={clsx(styles.blocksWrapperClosed, {[styles.blocksWrapperOpen]: isOpened})}>
-                        <div className="topBlock">
-                            {navbarLinkData.topBlock.map((item)=>
-                                <NavItem 
-                                    id={item.id}
-                                    key={item.id}
-                                    clickedId={clickedId}
-                                    iconClikced={item.iconClicked}
-                                    iconDefault={item.iconDefault}
-                                    title={item.title}
-                                    routerName={item.routerName}
-                                    handleClick={handleClick}
+                    <div className={styles.blocksWrapperOpen}>
+                        <div className={styles.brandContainer}>
+                            <div 
+                                className={styles.menuToggler}
+                                onClick={handleToggeler}    
+                            >
+                                <Menu />
+                            </div>
+                            <div className={styles.brand}>
+                                <SmartDisplay 
+                                    className={styles.brandIcon}
+                                    onClick={()=>{navigate('/home')}}
+                                    style={{fontSize:"40px", cursor:"pointer"}}
                                 />
-                            )}
+                                <div className={styles.brandTitle}>YT API Project</div>
+                            </div>
                         </div>
-                        <div className={styles.divider}/>
-                        <div className={styles.blockTitle}>個人中心</div>
-                        <div className="userCenter">
-                            {navbarLinkData.userCenter.map((item)=>
-                                <NavItem 
-                                    id={item.id}
-                                    key={item.id}
-                                    clickedId={clickedId}
-                                    iconClikced={item.iconClicked}
-                                    iconDefault={item.iconDefault}
-                                    title={item.title}
-                                    routerName={item.routerName}
-                                    handleClick={handleClick}
-                                />
-                            )}
+                        <div className={styles.blockPannel}>
+                            <div className="topBlock">
+                                {navbarLinkData.topBlock.map((item)=>
+                                    <NavItem 
+                                        id={item.id}
+                                        key={item.id}
+                                        clickedId={clickedId}
+                                        iconClikced={item.iconClicked}
+                                        iconDefault={item.iconDefault}
+                                        title={item.title}
+                                        routerName={item.routerName}
+                                        handleClick={handleSetId}
+                                    />
+                                )}
+                            </div>
+                            <div className={styles.divider}/>
+                            <div className={styles.blockTitle}>個人中心</div>
+                            <div className="userCenter">
+                                {navbarLinkData.userCenter.map((item)=>
+                                    <NavItem 
+                                        id={item.id}
+                                        key={item.id}
+                                        clickedId={clickedId}
+                                        iconClikced={item.iconClicked}
+                                        iconDefault={item.iconDefault}
+                                        title={item.title}
+                                        routerName={item.routerName}
+                                        handleClick={handleSetId}
+                                    />
+                                )}
+                            </div>
+                            <div className={styles.divider}/>
+                            <div className={styles.blockTitle}>訂閱頻道</div>
+                            <div className="subscribe-channels">
+                                { channels && channels.length > 0 ? channels.map((item)=>
+                                    <ChannelItem 
+                                        key={item.id}
+                                        id={item.id}
+                                        url={item.snippet.thumbnails.default.url}
+                                        title={item.snippet.title}
+                                    />
+                                ) : null}
+                            </div>
+                            <div className={styles.divider}/>
+                            <div className={styles.blockTitle}>探索</div>
+                            <div className="expolorePanel">
+                                {navbarLinkData.expolorePanel.map((item)=>
+                                    <NavItem 
+                                        id={item.id}
+                                        key={item.id}
+                                        clickedId={clickedId}
+                                        iconClikced={item.iconClicked}
+                                        iconDefault={item.iconDefault}
+                                        title={item.title}
+                                        routerName={item.routerName}
+                                        handleClick={handleSetId}
+                                    />
+                                )}
+                            </div>
+                            <div className={styles.divider}/>
+                            <div className="bottomBlock">
+                                {navbarLinkData.bottomBlock.map((item)=>
+                                    <NavItem 
+                                        id={item.id}
+                                        key={item.id}
+                                        clickedId={clickedId}
+                                        iconClikced={item.iconClicked}
+                                        iconDefault={item.iconDefault}
+                                        title={item.title}
+                                        routerName={item.routerName}
+                                        handleClick={handleSetId}
+                                    />
+                                )}
+                            </div> 
+                            <div className={styles.footer}></div>
                         </div>
-                        <div className={styles.divider}/>
-                        <div className={styles.blockTitle}>訂閱頻道</div>
-                        <div className="subscribe-channels">
-                            { channels && channels.length > 0 ? channels.map((item)=>
-                                <ChannelItem 
-                                    key={item.id}
-                                    id={item.id}
-                                    url={item.snippet.thumbnails.default.url}
-                                    title={item.snippet.title}
-                                />
-                            ) : null}
-                        </div>
-                        <div className={styles.divider}/>
-                        <div className={styles.blockTitle}>探索</div>
-                        <div className="expolorePanel">
-                            {navbarLinkData.expolorePanel.map((item)=>
-                                <NavItem 
-                                    id={item.id}
-                                    key={item.id}
-                                    clickedId={clickedId}
-                                    iconClikced={item.iconClicked}
-                                    iconDefault={item.iconDefault}
-                                    title={item.title}
-                                    routerName={item.routerName}
-                                    handleClick={handleClick}
-                                />
-                            )}
-                        </div>
-                        <div className={styles.divider}/>
-                        <div className="bottomBlock">
-                            {navbarLinkData.bottomBlock.map((item)=>
-                                <NavItem 
-                                    id={item.id}
-                                    key={item.id}
-                                    clickedId={clickedId}
-                                    iconClikced={item.iconClicked}
-                                    iconDefault={item.iconDefault}
-                                    title={item.title}
-                                    routerName={item.routerName}
-                                    handleClick={handleClick}
-                                />
-                            )}
-                        </div> 
-                        <div className={styles.footer}></div>
                     </div>
                 ):(
                     //Close    
                     <IconPanel/>
                 )}                    
             </div>
+            
         </>
         
     )

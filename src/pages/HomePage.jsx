@@ -21,7 +21,7 @@ const HomePage = ()=>{
     
     return(
         <div className={styles.homePage}>
-            <HeaderPanel/>
+            <HeaderPanel className={styles.headerPanel}/>
             <Navbar/>
         </div>
     )

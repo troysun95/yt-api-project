@@ -17,7 +17,7 @@
     --navbar-background:#F6F7F8;
     --divider:#E2E8F0;
     --hover-color:	#F0F0F0;
-
+    --menu-bgc:#dce0e2;
 
 
     //文字顏色
@@ -28,8 +28,6 @@
     //card-view
 
     //modal
-    --modal-background: #93989A; 
-    //
 
     //字體
     --main-font-family: "Noto Sans TC", sans-serif;
@@ -82,16 +80,15 @@ body {
 }
 
 
-@mixin icon-setting{
-    width: 35px;
-    height: 35px;
+@mixin icon-setting {
+    border:none;
     border-radius: 50%;
     cursor: pointer;
-    &:hover{
-        cursor: pointer;
-        background-color: var(--hover-color);
+    &:hover {
+      background-color: var(--hover-color);
     }
 }
+  
 //text ...
 @mixin title-three-dots{
     text-overflow: ellipsis;
