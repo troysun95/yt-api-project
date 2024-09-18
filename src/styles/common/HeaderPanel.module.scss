@@ -3,6 +3,7 @@
     width: 100%;
     height: 50px;
     @include d-flex-dir-j-a(row, space-between, center);
+    //brand
     .brandContainer{
         width: 40%;
         height: 50px;
@@ -18,9 +19,12 @@
                 font-size: 35px;
                 color:var(--brand);
                 cursor: pointer;
-                &:hover{
-                    background-color: var(--hover-color);
+                &{
+                    &:hover{
+                        background-color: var(--hover-color);
+                    }
                 }
+                
             }
             .brandTitle{
                 width: 80%;
@@ -37,6 +41,35 @@
     .brandContainerClosed{
         opacity: 0;
     }
+    //search
+    .searchBar{
+        .serchInputWrapperClosed{
+            //進 notes
+            display: none;
+        }
+        .serchInputWrapper{
+            width: 100%;
+            height: 40px;
+            z-index: 1;
+            .arrowBack,
+            .searchIcon{
+                @include icon-setting;
+                width: 30px;
+                height: 30px;
+            }
+            .searchInput{
+                outline: 1px solid #000;
+                border-radius: 20px;
+                margin-left: 20px;
+            .searchIcon{
+                background-color: var(--menu-bgc);
+            }
+          }
+        }
+    }
+
+
+    //headerIcon
     .headerIconContainer{
         width: 30%;
         height: 50px;

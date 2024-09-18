@@ -21,9 +21,12 @@
                 border-radius: 50%;
                 cursor: pointer;
                 @include d-flex-dir-j-a(row, center, center);
-                &:hover{
-                    background-color: var(--hover-color);
+                &{
+                    &:hover{
+                        background-color: var(--hover-color);
+                    }
                 }
+                
             }
             .brand{
                 width: 80%;
@@ -71,12 +74,14 @@
                     margin-left: 10px;
                     @include title-three-dots;
                 }
-                &:hover{
-                    background-color: var(--hover-color);
+                &{
+                    &:hover{
+                        background-color: var(--hover-color);
+                    }
                 }
+                
             }
         }
-
    }
 
    //toggler closed
@@ -90,9 +95,12 @@
             cursor: pointer;
             border-radius: 5px;
             @include d-flex-dir-j-a(column, center, center);
-            &:hover{
-                background-color: var(--hover-color);
+            &{
+                &:hover{
+                    background-color: var(--hover-color);
+                }
             }
+            
             span{
                 font-size: 10px;
             }

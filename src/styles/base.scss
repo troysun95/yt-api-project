@@ -72,10 +72,10 @@ body {
 
 //flex-box
 
-@mixin d-flex-dir-j-a($flex-direction,$justify-connetnt, $align-items){
+@mixin d-flex-dir-j-a($flex-direction,$justify-content, $align-items){
     display: flex;
     flex-direction: $flex-direction;
-    justify-content: $justify-connetnt;
+    justify-content: $justify-content;
     align-items: $align-items;
 }
 
@@ -84,9 +84,11 @@ body {
     border:none;
     border-radius: 50%;
     cursor: pointer;
-    &:hover {
-      background-color: var(--hover-color);
-    }
+    &{
+        &:hover {
+            background-color: var(--hover-color);
+          }
+   } 
 }
   
 //text ...

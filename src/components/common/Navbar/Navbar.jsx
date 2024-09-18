@@ -221,7 +221,7 @@ const Navbar = ()=>{
                                         iconDefault={item.iconDefault}
                                         title={item.title}
                                         routerName={item.routerName}
-                                        handleClick={handleSetId}
+                                        handleSetId={handleSetId}
                                     />
                                 )}
                             </div>
@@ -237,7 +237,7 @@ const Navbar = ()=>{
                                         iconDefault={item.iconDefault}
                                         title={item.title}
                                         routerName={item.routerName}
-                                        handleClick={handleSetId}
+                                        handleSetId={handleSetId}
                                     />
                                 )}
                             </div>
@@ -265,7 +265,7 @@ const Navbar = ()=>{
                                         iconDefault={item.iconDefault}
                                         title={item.title}
                                         routerName={item.routerName}
-                                        handleClick={handleSetId}
+                                        handleSetId={handleSetId}
                                     />
                                 )}
                             </div>
@@ -280,7 +280,7 @@ const Navbar = ()=>{
                                         iconDefault={item.iconDefault}
                                         title={item.title}
                                         routerName={item.routerName}
-                                        handleClick={handleSetId}
+                                        handleSetId={handleSetId}
                                     />
                                 )}
                             </div> 
@@ -289,10 +289,13 @@ const Navbar = ()=>{
                     </div>
                 ):(
                     //Close    
-                    <IconPanel/>
+                    <IconPanel
+                        clickedId={clickedId}
+                        handleSetId={handleSetId}
+                    />
                 )}                    
             </div>
-            
+
         </>
         
     )

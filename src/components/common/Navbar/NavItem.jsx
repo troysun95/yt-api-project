@@ -8,13 +8,14 @@ const NavItem = ({
   iconDefault, 
   title, 
   routerName,
-  handleClick
+  handleSetId
 }) => {
 
   return (
     <div 
+      id={id}
       className={styles.itemContainer} 
-      onClick={handleClick}
+      onClick={handleSetId}
     >
       { iconClikced && iconDefault ? (
         clickedId === id ?(

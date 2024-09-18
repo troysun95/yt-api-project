@@ -5,7 +5,7 @@ import {
     DownloadDone, DownloadDoneOutlined,
 } from "@mui/icons-material"
 
-const IconPanel =({clickedId ,handleClick})=>{
+const IconPanel =({clickedId ,handleSetId})=>{
     
     const data = [{
         "id": "n-1-1",
@@ -41,7 +41,7 @@ const IconPanel =({clickedId ,handleClick})=>{
                     key={`icon-${item.id} `}
                     id={item.id}
                     className={styles.iconItem}
-                    onClick={handleClick}
+                    onClick={handleSetId}
                 >
                     {clickedId === item.id ?(item.iconClicked) : (item.iconDefault)}    
                     <span>{item.title}</span>                    

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isMenuOpened: false,
-    itemClickedId: ""
+    itemClickedId: "n-1-1"
 }
 
 const navbarSlice = createSlice({
